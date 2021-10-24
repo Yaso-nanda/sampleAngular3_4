@@ -7,7 +7,7 @@ WORKDIR /app
 COPY --from=0 /app/sampleAngular2 /app
 RUN npm install -g @angular/cli@10.0.4 && \
     npm install && \
-    ng build --prod --base-href /employeemanagerapp/
+    ng build --prod --base-href /employeemanager/
     
 FROM maven:3.6-jdk-11
 WORKDIR /app
