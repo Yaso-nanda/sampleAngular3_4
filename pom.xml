@@ -26,7 +26,7 @@
             <!-- Add frontend folder to war package -->
             <webResources>
                 <resource>
-                    <directory>dist/employ</directory>
+                    <directory>dist/angular-frontend</directory>
                 </resource>
             </webResources>
 
