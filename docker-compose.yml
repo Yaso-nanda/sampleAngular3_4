@@ -1,7 +1,7 @@
 version: "3"
 services:
      angular:
-         image: angularimage
+         image: angulr
          ports:
            - 4445:8080
          build:
