@@ -6,7 +6,7 @@
   <packaging>war</packaging>
 
   <build>
-   <finalName>employeemanager</finalName>
+   <finalName>employ</finalName>
     <plugins>
     <plugin>
             <groupId>com.github.eirslett</groupId>
@@ -26,7 +26,7 @@
             <!-- Add frontend folder to war package -->
             <webResources>
                 <resource>
-                    <directory>dist/employeemanager</directory>
+                    <directory>dist/employ</directory>
                 </resource>
             </webResources>
 
