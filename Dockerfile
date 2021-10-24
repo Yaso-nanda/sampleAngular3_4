@@ -9,7 +9,7 @@ RUN ls
 RUN npm install -g @angular/cli@10.0.4 && \
     npm install && \
     ng build --prod --base-href /employ/
-RUN ls
+RUN ls dist
 
 FROM maven:3.6-jdk-11
 WORKDIR /app
