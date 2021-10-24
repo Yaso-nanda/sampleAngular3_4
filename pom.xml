@@ -6,7 +6,7 @@
   <packaging>war</packaging>
 
   <build>
-   <finalName>employ</finalName>
+   <finalName>angular-frontend</finalName>
     <plugins>
     <plugin>
             <groupId>com.github.eirslett</groupId>
