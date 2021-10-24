@@ -5,10 +5,12 @@ RUN git clone https://github.com/Yaso-nanda/sampleAngular3.git
 FROM node:12.7-alpine
 WORKDIR /app
 COPY --from=0 /app/sampleAngular3 /app
+RUN ls
 RUN npm install -g @angular/cli@10.0.4 && \
     npm install && \
     ng build --prod --base-href /employ/
-    
+RUN ls
+
 FROM maven:3.6-jdk-11
 WORKDIR /app
 COPY --from=1 /app /app
