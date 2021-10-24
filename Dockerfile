@@ -8,7 +8,7 @@ COPY --from=0 /app/sampleAngular3 /app
 RUN ls
 RUN npm install -g @angular/cli@10.0.4 && \
     npm install && \
-    ng build --prod --base-href /employ/
+    ng build --prod --base-href /angular-frontend/
 RUN ls dist
 
 FROM maven:3.6-jdk-11
@@ -17,4 +17,4 @@ COPY --from=1 /app /app
 RUN mvn clean install -DskipTests
 
 FROM tomcat:8.5.47-jdk8-openjdk
-COPY --from=2 /app/target/employ.war /usr/local/tomcat/webapps
+COPY --from=2 /app/target/angular-frontend.war /usr/local/tomcat/webapps
