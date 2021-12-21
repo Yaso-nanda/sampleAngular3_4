@@ -5,19 +5,13 @@ pipeline {
       stages {
           stage('Install dependencies') {
       steps {
-        sh 'npm i -save express'
+        sh 'npm install'
       }
     }     
     stage('Test') {
       steps {
-         sh 'node server.js'
+         sh 'ng build --prod --base-href /angular-frontend/'
       }
     }
-          stage('Deploy'){
-             steps{
-                 sh 'sudo systemctl start docker'
-                 sh 'sudo docker-compose up -d'
-                  }
-                          }
               }
           } 
