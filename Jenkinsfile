@@ -13,5 +13,24 @@ pipeline {
          sh 'ng build --prod --base-href /angular-frontend/'
       }
     }
+        stage('SonarQube analysis & Mvn') {
+              steps{
+                   withSonarQubeEnv('sonarqube'){
+                     sh 'mvn clean install -DskipTests sonar:sonar'
+                    //-Dsonar.projectKey=sonar-maven \
+                    //-Dsonar.host.url=http://192.168.50.104:9000 \
+                    ///-Dsonar.login=d33c224155aa7f3777856387ded0dccd7205a02b \
+                    //-Dsonar.sources=src/main/java/ \
+                    //-Dsonar.java.binaries=target/classes"
+                   }
+              }
+           }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
               }
           } 
