@@ -1,5 +1,8 @@
 pipeline {
       agent any
+      environment{
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+     }
       tools {nodejs "nodejs"}
       
       stages {
