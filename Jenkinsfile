@@ -32,5 +32,13 @@ pipeline {
               }
             }
           }
+        stage('docker push'){
+              steps{
+                 sh 'whoami'
+                 sh 'docker build -t dockerdmantz/ang-repo .'
+                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                 sh 'docker push dockerdmantz/ang-repo'
+              }
+         }
               }
           } 
