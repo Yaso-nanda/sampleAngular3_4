@@ -9,14 +9,10 @@ pipeline {
           stage('Install dependencies') {
       steps {
         sh 'npm install'
+        sh 'ng build --prod --base-href /angular-frontend/'
       }
     }     
-    stage('Test') {
-      steps {
-         sh 'ng build --prod --base-href /angular-frontend/'
-      }
-    }
-        stage('SonarQube analysis & Mvn') {
+        stage('SonarQube analysis & Maven build') {
               steps{
                    withSonarQubeEnv('sonarqube'){
                      sh 'mvn clean install -DskipTests sonar:sonar'
@@ -35,7 +31,7 @@ pipeline {
               }
             }
           }
-        stage('docker push'){
+        stage('push to repository'){
               steps{
                  sh 'whoami'
                  sh 'docker build -t dockerdmantz/ang-repo .'
