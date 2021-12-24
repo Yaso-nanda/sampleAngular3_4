@@ -1,12 +1,18 @@
 pipeline {
-     agent any
-     
-     environment{
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+      agent any
+      environment{
+        DOCKERHUB_CREDENTIALS = credentials('5402a8e2-7488-4697-afed-2d08e8c99ed0')
      }
-     
-     stages {
-         stage('SonarQube analysis & Mvn') {
+      tools {nodejs "nodejs"}
+      
+      stages {
+          stage('Install dependencies') {
+      steps {
+        sh 'npm install'
+        sh 'ng build --prod --base-href /angular-frontend/'
+      }
+    }     
+        stage('SonarQube analysis & Maven build') {
               steps{
                    withSonarQubeEnv('sonarqube'){
                      sh 'mvn clean install -DskipTests sonar:sonar'
@@ -25,5 +31,13 @@ pipeline {
               }
             }
           }
-       }
-}
+        stage('push to repository'){
+              steps{
+                 sh 'whoami'
+                 sh 'docker build -t dockerdmantz/ang-repo .'
+                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                 sh 'docker push dockerdmantz/ang-repo'
+              }
+         }
+              }
+          } 
