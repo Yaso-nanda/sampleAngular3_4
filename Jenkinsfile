@@ -9,6 +9,7 @@ pipeline {
           stage('Install dependencies') {
       steps {
         sh 'npm install'
+        sh 'npm install --save-dev sonar-scanner'
         sh 'ng build --prod --base-href /angular-frontend/'
       }
     }     
