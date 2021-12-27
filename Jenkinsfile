@@ -10,11 +10,15 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm install --save-dev sonar-scanner'
+      }
+    } 
+        stage('Sonarqube Analysis') {
+      steps {
         sh 'npm run sonar'
         sh 'ng build --prod --base-href /angular-frontend/'
       }
-    }     
-        stage('SonarQube analysis & Maven build') {
+    }
+        stage('Maven build') {
               steps{
                    withSonarQubeEnv('sonarqube'){
                      sh 'mvn clean install -DskipTests sonar:sonar'
