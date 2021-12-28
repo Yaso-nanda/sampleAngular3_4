@@ -1,0 +1,22 @@
+pipeline {
+      agent any
+      environment{
+        DOCKERHUB_CREDENTIALS = credentials('5402a8e2-7488-4697-afed-2d08e8c99ed0')
+     }
+      tools {nodejs "nodejs"}
+      
+      stages {
+          stage('Send email') {
+    def mailRecipients = "yasonanda111@gmail.com.com"
+    def jobName = currentBuild.fullDisplayName
+
+    emailext body: '''${SCRIPT, template="groovy-html.template"}''',
+        mimeType: 'text/html',
+        subject: "[Jenkins] ${jobName}",
+        to: "${mailRecipients}",
+        replyTo: "${mailRecipients}",
+        recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+} 
+        
+              }
+          } 
