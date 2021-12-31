@@ -37,13 +37,22 @@ pipeline {
               }
             }
           }
-        stage('push to repository'){
-              steps{
-                 sh 'whoami'
-                 sh 'docker build -t dockerdmantz/ang-repo .'
-                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                 sh 'docker push dockerdmantz/ang-repo'
-              }
+        //stage('push to repository'){
+          //    steps{
+            //     sh 'whoami'
+              //   sh 'docker build -t dockerdmantz/ang-repo .'
+                // sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                 //sh 'docker push dockerdmantz/ang-repo'
+             // }
+        // }
+        stage('Push to Nexus'){
+           steps{
+             withCredentials([string(credentialsId: 'nexus_pass', variable: 'PASSWORD')]) {
+                sh 'docker build -t nexus.dmantzrepo.tech/repo/sb .'
+                sh 'docker login nexus.dmantzrepo.tech/repo -u admin -p "${PASSWORD}"'
+                sh 'docker push nexus.dmantzrepo.tech/repo/sb'
+             }
+         }
          }
               }
           } 
