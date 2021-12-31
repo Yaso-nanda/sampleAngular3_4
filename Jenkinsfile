@@ -48,7 +48,7 @@ pipeline {
         stage('Push to Nexus'){
            steps{
              withCredentials([string(credentialsId: 'nexus_pass', variable: 'PASSWORD')]) {
-                sh 'docker build -t nexus.dmantzrepo.tech/repo/sb .'
+                sh 'docker build -t nexus.dmantzrepo.tech/repo/ang .'
                 sh 'docker login nexus.dmantzrepo.tech/repo -u admin -p "${PASSWORD}"'
                 sh 'docker push nexus.dmantzrepo.tech/repo/ang'
              }
