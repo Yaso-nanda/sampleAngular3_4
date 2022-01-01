@@ -9,7 +9,7 @@
   - name: copying files 
    # become: true
     copy:
-      src: /home/ansadmin/ans/kube/
+      src: /home/ansadmin/ans/
       dest: /home/ubuntu/
   - name: create a deployment
     command: kubectl apply -f angdeployment.yml
