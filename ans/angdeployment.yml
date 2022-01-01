@@ -19,9 +19,11 @@ spec:
       labels:
         app: tomcat
     spec:
+      imagePullSecrets:
+      - name: final4
       containers:
       - name: tomcat
-        image: dockerdmantz/ang-repo
+        image: nexus.dmantzrepo.tech/repo/ang
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
