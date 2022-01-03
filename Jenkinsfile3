@@ -11,7 +11,7 @@ pipeline {
     } 
         stage('Sonarqube Analysis') {
       steps {
-        sh "sonar-scanner -Dproject.settings='sonar-scanner2.properties'"
+        sh "npm run sonar2"
         sh 'ng build --prod --base-href /angular-frontend/'
       }
     }
