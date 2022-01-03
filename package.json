@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sonar": "sonar-scanner -Dproject.settings=sonar-project2.properties"
+    "sonar1": "sonar-scanner -Dproject.settings=sonar-project1.properties"
+    "sonar2": "sonar-scanner -Dproject.settings=sonar-project2.properties"
   },
   "private": true,
   "dependencies": {
