@@ -14,7 +14,7 @@ pipeline {
     } 
         stage('Sonarqube Analysis') {
       steps {
-        sh 'npm run sonar'
+        sh 'npm run sonar1'
         sh 'ng build --prod --base-href /angular-frontend/'
       }
     }
