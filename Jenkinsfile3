@@ -11,15 +11,14 @@ pipeline {
     } 
         stage('Sonarqube Analysis') {
       steps {
-        sh "npm run sonar -Dproject.settings='sonar-scanner2.properties'"
+        sh "sonar-scanner -Dproject.settings='sonar-scanner2.properties'"
         sh 'ng build --prod --base-href /angular-frontend/'
       }
     }
         stage('Maven build') {
               steps{
                    withSonarQubeEnv('sonarqube'){
-                     sh "mvn clean install -DskipTests sonar:sonar \
-                      -Dproject.settings='/var/lib/jenkins/workspace/Frontend CI/sonar-scanner2.properties'"
+                     sh "mvn clean install"
                     //-Dsonar.host.url=http://192.168.50.104:9000 \
                     ///-Dsonar.login=d33c224155aa7f3777856387ded0dccd7205a02b \
                     //-Dsonar.sources=src/main/java/ \
