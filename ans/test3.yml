@@ -17,9 +17,7 @@
   #  command: kubectl apply -f angservice.yml
  # - name: rollout
 #    command: kubectl rollout restart deployment.v1.apps/tomcat-deployment
-    
-    
- ---
+
 - name: Create pods using deployment
   hosts: server
   #become: true
