@@ -1,0 +1,42 @@
+---
+#- name: Create pods using deployment
+ # hosts: kubernetes
+  #become: true
+ # user: ubuntu
+
+
+ # tasks:
+ # - name: copying files 
+   # become: true
+   # copy:
+  #    src: /home/ansadmin/ans/
+ #     dest: /home/ubuntu/
+ # - name: create a deployment
+ #   command: kubectl apply -f angdeployment.yml
+ # - name:
+  #  command: kubectl apply -f angservice.yml
+ # - name: rollout
+#    command: kubectl rollout restart deployment.v1.apps/tomcat-deployment
+    
+    
+ ---
+- name: Create pods using deployment
+  hosts: server
+  #become: true
+  user: kadmin
+
+  tasks:
+  - name: copying files 
+   # become: true
+    copy:
+      src: /home/ansadmin/ans/
+      dest: /home/kadmin/
+  - name: Pod Creation
+    command: "{{ item }}"
+    with_items:
+     - kubectl apply -f angdeployment.yml
+     - kubectl apply -f angservice.yml
+     - kubectl rollout restart deployment.v1.apps/tomcat-deployment
+    environment:
+      KUBECONFIG: /home/kadmin/.kube/config
+    when: inventory_hostname == "192.168.0.144"
