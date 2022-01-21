@@ -5,8 +5,8 @@ pipeline {
       stages {
           stage('Install dependencies') {
       steps {
-        sh 'npm install'
-        sh 'npm install --save-dev sonar-scanner'
+       // sh 'npm install'
+        sh 'npm install sonar-scanner --save-dev'
       }
     } 
         stage('Sonarqube Analysis') {
