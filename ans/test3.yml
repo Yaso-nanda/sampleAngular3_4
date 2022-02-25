@@ -19,22 +19,19 @@
 #    command: kubectl rollout restart deployment.v1.apps/tomcat-deployment
 
 - name: Create pods using deployment
-  hosts: server
+  hosts: kubernetes
   #become: true
-  user: kadmin
+  user: ubuntu
 
   tasks:
   - name: copying files 
    # become: true
     copy:
       src: /home/ansadmin/ans/
-      dest: /home/kadmin/
+      dest: /home/ubuntu/
   - name: Pod Creation
     command: "{{ item }}"
     with_items:
      - kubectl apply -f angdeployment.yml
      - kubectl apply -f angservice.yml
      - kubectl rollout restart deployment.v1.apps/tomcat-deployment
-    environment:
-      KUBECONFIG: /home/kadmin/.kube/config
-    when: inventory_hostname == "192.168.0.144"
